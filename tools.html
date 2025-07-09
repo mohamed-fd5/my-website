@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>برامجي - موقعي الشخصي</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- شريط التنقل -->
+  <nav class="navbar">
+    <a href="index.html">🏠 الرئيسية</a>
+    <a href="about.html">🙋‍♂️ من أنا</a>
+    <a href="projects.html">💼 أعمالي</a>
+    <a href="tools.html">🧮 برامجي</a>
+    <a href="contact.html">📬 تواصل معي</a>
+  </nav>
+
+  <section class="tools-section">
+    <div class="container">
+      <h1 class="section-title">برامجي الحسابية</h1>
+
+      <!-- أداة حساب حجم الاسطوانة -->
+      <div class="tool-card">
+        <h2>حساب حجم الاسطوانة</h2>
+        <input type="number" id="radius" placeholder="نصف القطر (سم)">
+        <input type="number" id="height" placeholder="الارتفاع (سم)">
+        <button onclick="calcCylinder()">احسب</button>
+        <p id="cylinderResult"></p>
+      </div>
+
+      <!-- أداة حساب مساحة الدائرة -->
+      <div class="tool-card">
+        <h2>حساب مساحة الدائرة</h2>
+        <input type="number" id="circleRadius" placeholder="نصف القطر (سم)">
+        <button onclick="calcCircle()">احسب</button>
+        <p id="circleResult"></p>
+      </div>
+
+      <!-- أداة حل معادلة من الدرجة الثانية -->
+      <div class="tool-card">
+        <h2>حل معادلة من الدرجة الثانية</h2>
+        <input type="number" id="a" placeholder="القيمة a">
+        <input type="number" id="b" placeholder="القيمة b">
+        <input type="number" id="c" placeholder="القيمة c">
+        <button onclick="solveQuadratic()">احسب</button>
+        <p id="quadResult"></p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function calcCylinder() {
+      const r = parseFloat(document.getElementById("radius").value);
+      const h = parseFloat(document.getElementById("height").value);
+      const v = Math.PI * r * r * h;
+      document.getElementById("cylinderResult").textContent = "الحجم = " + v.toFixed(2) + " سم³";
+    }
+
+    function calcCircle() {
+      const r = parseFloat(document.getElementById("circleRadius").value);
+      const area = Math.PI * r * r;
+      document.getElementById("circleResult").textContent = "المساحة = " + area.toFixed(2) + " سم²";
+    }
+
+    function solveQuadratic() {
+      const a = parseFloat(document.getElementById("a").value);
+      const b = parseFloat(document.getElementById("b").value);
+      const c = parseFloat(document.getElementById("c").value);
+      const d = b * b - 4 * a * c;
+      let result;
+
+      if (d > 0) {
+        const x1 = (-b + Math.sqrt(d)) / (2 * a);
+        const x2 = (-b - Math.sqrt(d)) / (2 * a);
+        result = `الحلين: ${x1.toFixed(2)} و ${x2.toFixed(2)}`;
+      } else if (d === 0) {
+        const x = -b / (2 * a);
+        result = `حل واحد: ${x.toFixed(2)}`;
+      } else {
+        result = "لا يوجد حلول حقيقية.";
+      }
+
+      document.getElementById("quadResult").textContent = result;
+    }
+  </script>
+
+</body>
+</html>
